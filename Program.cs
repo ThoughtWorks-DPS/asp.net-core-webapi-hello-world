@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Serilog;
+using Serilog.Formatting.Compact;
 
 namespace HelloWorld
 {
@@ -22,7 +23,7 @@ namespace HelloWorld
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
                 .Enrich.FromLogContext()
-                .WriteTo.Console()
+                .WriteTo.Console(new CompactJsonFormatter())
                 .CreateLogger();
             BuildWebHost(args).Run();
         }
